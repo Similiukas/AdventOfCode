@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Dart & Flutter",
+            "name": "Advent of Code 2020 (Dart)",
             "request": "launch",
             "program": "src/main.dart",
             "type": "dart"
