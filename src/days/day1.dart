@@ -26,7 +26,7 @@ void part1(List data){
     }
   }
 }
-
+// That's just ugly but spent way too much time on this
 void part2(List data){
   for (var i = 0; data[i] + data[i + 1] + data[i + 2] < 2020; i++) {
     var j = i + 1;
