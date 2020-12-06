@@ -41,8 +41,8 @@ Future<int> findPasswordsPart2() async {
     List<String> contents = line.split(new RegExp('[-: ]'));
     int min = int.parse(contents[0]);
     int max = int.parse(contents[1]);
-    // Sad, no XOR operator in dart
-    if ((contents[4][min - 1] == contents[2] || contents[4][max - 1] == contents[2]) && !(contents[4][min - 1] == contents[2] && contents[4][max - 1] == contents[2])) {
+    // Sad, no XOR operator in dart but hey, that works
+    if ((contents[4][min - 1] == contents[2]) != (contents[4][max - 1] == contents[2])) {
       correctPasswords++;
     }
   }
@@ -51,6 +51,6 @@ Future<int> findPasswordsPart2() async {
 
 void day2() async {
   print('Well I\'m a bit late');
-  int found = await findPasswordsPart1();
+  int found = await findPasswordsPart2();
   print('Found $found passwords which match the corporate policy');
 }
