@@ -21,7 +21,7 @@ Future<int> countGroupsSum() async{
   sum += letters.length;
   return sum;
 }
-
+// Part two
 Future<int> countGroupsTogether() async{
   var file = new File('input/day6/input.txt');
   Stream<List<int>> inputStream = file.openRead();
