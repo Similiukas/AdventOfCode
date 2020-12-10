@@ -1,6 +1,6 @@
-import 'days/day10.dart';
+import 'days/day09.dart';
 
 void main(List<String> args) {
   print('Hello world! This is main.dart talking');
-  day10();
+  day9();
 }

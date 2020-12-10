@@ -5,9 +5,9 @@ import '../helpers.dart';
 
 // Part one
 Future<int> notXMAS() async {
-  var file = File('input/day9/input.txt');
+  var file = File('input/day09/input.txt');
   List<int> inputStream = (await file.readAsLines()).map(int.parse).toList();
-  List<int> preamble = await readFileIntLines('input/day9/input.txt', 25);  // First 25 lines are preamble
+  List<int> preamble = await readFileIntLines('input/day09/input.txt', 25);  // First 25 lines are preamble
   int pointer = -1;
   for(int number in inputStream.sublist(25)){                               // Continuing to read file from line 26
     bool followsRules = false;
@@ -27,7 +27,7 @@ Future<int> notXMAS() async {
 // Part two
 Future<int> contigousSet(int defect) async {
   var sum = 0, smallest = defect, largest = 0, pointer = 0;
-  List<int> input = await readFileInt('input/day9/input.txt');  // Would be better to read files up to defect value
+  List<int> input = await readFileInt('input/day09/input.txt');  // Would be better to read files up to defect value
   // Going through file and adding all the numbers until they are bigger than defect. Then restarting from the next number. Very not ideal, pretty much brute forcing
   for (int i = 0; input[i] < defect; ++i){
     int line = input[i];
@@ -37,8 +37,12 @@ Future<int> contigousSet(int defect) async {
       largest = max(largest, line);
     }
     else if(sum > defect){
-      i = ++pointer;      // Since the sum is bigger, resetting i to the value it started + 1
-      sum = 0; smallest = defect; largest = 0;
+      do {                      // Since sum is bigger than defect, need to decrease it until it's not
+        sum -= input[pointer++];// Decreasing from the first elements added to imaginary set (since the set needs to be contigous)
+        smallest = input.sublist(pointer, i).reduce(min); // Need to find min and max again
+        largest = input.sublist(pointer, i).reduce(max);
+      } while (sum > defect);
+      i--;                                                // If sum is not found, need to check if the last element since adding it might get the sum
     }
     else return smallest + largest;
   }
