@@ -1,2 +1,4 @@
-# Advent of code
-Advent of code 2020 in dart (https://adventofcode.com/)
+# Advent of Code
+Advent of code challenges completed every year before I come back home with a different programming language to spice it up:
+ - 2020: **Dart** (18/25 challenges completed)
+ - 2021: **Go**
