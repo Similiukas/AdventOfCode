@@ -39,7 +39,7 @@ func GetFirstFileLine(day string) string {
 		panic(err)
 	}
 
-	return firstLine
+	return firstLine[:len(firstLine)-1]
 }
 
 // Removes element at i-th position replacing it with the last element of the slice
@@ -47,4 +47,15 @@ func GetFirstFileLine(day string) string {
 func RemoveFromArray(s []string, i int) []string {
 	s[i] = s[len(s)-1]
 	return s[:len(s)-1]
+}
+
+func SliceStringToInt(arr []string) (result []int) {
+	for _, i := range arr {
+		num, err := strconv.Atoi(i)
+		if err != nil {
+			panic(err)
+		}
+		result = append(result, int(num))
+	}
+	return
 }
