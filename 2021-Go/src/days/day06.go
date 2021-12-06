@@ -58,10 +58,34 @@ func getAllFishNumbers(fishies []int) (result int) {
 	return result + len(fishies)
 }
 
+// Waaay faster and better part one and two
+func properFishCount(fishies []int, days int) (result int) {
+	// We get (0, 1, 2, 3, 4, 5, 6, 7, 8) where ith position tells how many fish are there with timer i
+	var fishTimers [9]int
+	for _, fish := range fishies {
+		fishTimers[fish]++
+	}
+	for i := 0; i < days; i++ {
+		newFishCount := fishTimers[0]
+		// Every day, we move fish count from right to left to indicate that timer decreased by 1
+		for j := 0; j < 8; j++ {
+			fishTimers[j] = fishTimers[j+1]
+		}
+		fishTimers[8] = newFishCount  // There are n new number of fishes
+		fishTimers[6] += newFishCount // Fish with timer 0 refresh to timer 6 and also fish with timer 7 are added
+	}
+	// Now we just calculate the result
+	for _, fishCount := range fishTimers {
+		result += fishCount
+	}
+	return
+}
+
 func Day06() {
 	println("Systems done, now just hyped work work work")
 	fishies := getInitialFishTimers()
 	// println(strings.Split(helpers.GetFirstFileLine("day06"), ",")[4])
-	println("Number of fishies:", len(simulateFishDay(80, fishies)))
-	println("Fancy way:", getAllFishNumbers(fishies))
+	// println("Number of fishies:", len(simulateFishDay(80, fishies)))
+	// println("Fancy way:", getAllFishNumbers(fishies))
+	println("Proper way:", properFishCount(fishies, 256))
 }
