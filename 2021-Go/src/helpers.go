@@ -59,3 +59,12 @@ func SliceStringToInt(arr []string) (result []int) {
 	}
 	return
 }
+
+func ContainsString(arr []string, victim string) bool {
+	for _, a := range arr {
+		if a == victim {
+			return true
+		}
+	}
+	return false
+}
