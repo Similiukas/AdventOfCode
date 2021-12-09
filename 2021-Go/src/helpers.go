@@ -68,3 +68,34 @@ func ContainsString(arr []string, victim string) bool {
 	}
 	return false
 }
+
+// Yep, same thing, but now with ints. A bit dry but eh, just wanna finish this for today
+func ContainsInt(arr []int, victim int) bool {
+	for _, a := range arr {
+		if a == victim {
+			return true
+		}
+	}
+	return false
+}
+
+// No idea how to implement a new data structure with functions
+// func CreateQueue() *[]int {
+// 	var queue []int
+// 	return &queue
+// }
+
+// type queue interface {
+// 	q() []int
+// }
+
+// func queueTop(q queue) int {
+// 	return q.q[0]
+// }
+
+// type queueTop func(queue) int
+
+type Queue struct {
+	q   []int
+	top func(Queue) int
+}
