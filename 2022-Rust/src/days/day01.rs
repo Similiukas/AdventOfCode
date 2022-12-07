@@ -4,9 +4,9 @@ fn get_fattest_elf() -> i32 {
     let data: String = fs::read_to_string("input/day01/input.txt").expect("Unable to read file");
     let mut max: i32 = 0; let mut sum: i32 = 0;
 
-    for line in data.split('\n') {
+    for line in data.split("\n") {
         if !line.trim().is_empty() {
-            sum += line.trim().parse::<i32>().unwrap();
+            sum += line.trim().parse::<i32>().unwrap_or(0);
         } else {
             max = std::cmp::max(max, sum);
             sum = 0;
@@ -22,7 +22,7 @@ fn get_three_fattest_elfs() -> i32 {
 
     for line in data.split('\n') {
         if !line.trim().is_empty() {
-            sum += line.trim().parse::<i32>().unwrap();
+            sum += line.trim().parse::<i32>().unwrap_or(0);
         } else {
             if sum > max {
                 min = mid;
