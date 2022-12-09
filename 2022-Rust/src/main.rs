@@ -1,6 +1,6 @@
 mod days;
 
-use days::day03::solution;
+use days::day04::solution;
 
 fn main() {
     println!("Oh, Rusty boi");
