@@ -1,3 +1,4 @@
+use regex::Captures;
 
 #[derive(Clone)]
 pub struct Stack<T> {
@@ -31,3 +32,7 @@ impl<T> Stack<T> {
 //         self.stack.clone();
 //     }
 // }
+
+pub fn re_to_int(captures: &Captures, group_index: usize) -> usize {
+    captures.get(group_index).unwrap().as_str().parse::<usize>().unwrap_or(0)
+}

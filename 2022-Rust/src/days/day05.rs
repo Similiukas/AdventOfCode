@@ -1,6 +1,8 @@
 use regex::Regex;
 use lazy_static::lazy_static;
 
+use crate::helpers::re_to_int;
+
 // Optimization to compile Regex only once
 lazy_static! {
     static ref RE: Regex = Regex::new(r"move (\d+) from (\d+) to (\d+)").unwrap();
@@ -46,8 +48,7 @@ fn format_stacks(input: &str) -> Vec<Vec<char>> {
 fn move_crates(mut stacks: Vec<Vec<char>>, rest: &str) -> String {
     for line in rest.lines() {
         let captures = RE.captures(line).unwrap();
-        let from = captures.get(2).unwrap().as_str().parse::<usize>().unwrap_or(0) - 1;
-        let to = captures.get(3).unwrap().as_str().parse::<usize>().unwrap_or(0) - 1;
+        let (from, to) = (re_to_int(&captures, 2) - 1, re_to_int(&captures, 3) - 1);
         // Moving one crate at a time
         for _ in 0..captures.get(1).unwrap().as_str().parse::<i32>().unwrap_or(0) {
             let temp = stacks[from].pop().unwrap();
@@ -61,9 +62,7 @@ fn move_crates(mut stacks: Vec<Vec<char>>, rest: &str) -> String {
 fn move_multiple_crates(mut stacks: Vec<Vec<char>>, rest: &str) -> String {
     for line in rest.lines() {
         let captures = RE.captures(line).unwrap();
-        let count = captures.get(1).unwrap().as_str().parse::<usize>().unwrap_or(0);
-        let from = captures.get(2).unwrap().as_str().parse::<usize>().unwrap_or(0) - 1;
-        let to = captures.get(3).unwrap().as_str().parse::<usize>().unwrap_or(0) - 1;
+        let (count, from, to) = (re_to_int(&captures, 1), re_to_int(&captures, 2) - 1, re_to_int(&captures, 3) - 1);
         // Taking the crates that are being moved by slicing
         let moving_crates = (&stacks[from][stacks[from].len() - count..]).to_vec();
         stacks[to] = [stacks[to].clone(), moving_crates].concat();
