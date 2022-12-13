@@ -26,15 +26,13 @@ fn format_stacks(input: &str) -> Vec<Vec<char>> {
     let a: Vec<Vec<char>> = input.lines()
         .map(|line| {
             // Read characters by skipping first one and stepping every 4th one
-            (line[1..]).chars().step_by(4).map(|input| {
-                input
-            }).collect::<Vec<char>>()
+            (line[1..]).chars().step_by(4).collect::<Vec<char>>()
             // line
         }).collect();
 
     // Transpose it
-    let b: Vec<Vec<char>> = (0..a[0].len())
-        .map(|i| {
+    // Go through array rows to fill it in columns
+    let b: Vec<Vec<char>> = (0..a[0].len()).map(|i| {
             // Skip the last row as it's just the numbers
             a[0..a.len() - 1].iter().map(|inner| {
                 inner[i].clone()
@@ -50,6 +48,7 @@ fn move_crates(mut stacks: Vec<Vec<char>>, rest: &str) -> String {
         let captures = RE.captures(line).unwrap();
         let from = captures.get(2).unwrap().as_str().parse::<usize>().unwrap_or(0) - 1;
         let to = captures.get(3).unwrap().as_str().parse::<usize>().unwrap_or(0) - 1;
+        // Moving one crate at a time
         for _ in 0..captures.get(1).unwrap().as_str().parse::<i32>().unwrap_or(0) {
             let temp = stacks[from].pop().unwrap();
             stacks[to].push(temp);
@@ -76,7 +75,7 @@ fn move_multiple_crates(mut stacks: Vec<Vec<char>>, rest: &str) -> String {
 
 pub fn solution() {
     println!("Well how am I gonna read this input?");
-
+    // NOTE: It might not work depending on the system. Might need to split \n\r\n if set to CRLF
     let data: Vec<&str> = include_str!("../../input/day05/input.txt").split("\n\n").collect();
     let stacks = format_stacks(data[0]);
     println!("God damn did it took a long time to read the data: {}", move_crates(stacks.clone(), data[1]));
