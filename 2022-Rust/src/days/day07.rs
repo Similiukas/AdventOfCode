@@ -37,7 +37,7 @@ fn calculate_low_sums() -> u64 {
     let temp = &dir_sizes.clone();
     for (path, size) in &mut dir_sizes {
         for (sub_path, sub_size) in temp {
-            if path != sub_path && sub_path.contains(path) {
+            if path != sub_path && sub_path.starts_with(path) {
                 println!("This {path} is a parent of {sub_path} ({sub_size})");
                 *size += sub_size;
             }
