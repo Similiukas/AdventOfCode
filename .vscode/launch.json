@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Rust debugger",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/2022-Rust/target/debug/aoc.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}/2022-Rust",
+            "environment": [],
+            "externalConsole": false,
+            // This would be enoug without the tasks.json but it executes at ${workspaceRoot} cwd and doesn't find Cargo.toml there
+            "preLaunchTask": "rust: cargo build",
+            
+        },
+        {
             "name": "Advent of Code 2020 (Dart)",
             "request": "launch",
             "program": "src/main.dart",
