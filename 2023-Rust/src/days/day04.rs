@@ -34,9 +34,8 @@ fn get_recursive() -> i32 {
 
         let num_of_winners: usize = numbers.iter().filter(|a| winners.contains(a)).collect::<Vec<&&str>>().len();
 
-        let mul = multiples[i];
         for j in (i+1)..=(i+num_of_winners) {
-            multiples[j] += 1 * mul;
+            multiples[j] += 1 * multiples[i];
         }
     }
     multiples.iter().sum()
