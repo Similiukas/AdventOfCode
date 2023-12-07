@@ -1,6 +1,6 @@
 mod days;
 
-use days::day06::solution;
+use days::day07::solution;
 
 fn main() {
     println!("Welcome back, Rust");
