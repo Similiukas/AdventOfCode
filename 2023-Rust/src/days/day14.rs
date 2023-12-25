@@ -6,17 +6,6 @@ lazy_static! {
     static ref RE_W: Regex = Regex::new(r"(\.+)(O+)").unwrap();
 }
 
-fn check_equal(a: &Vec<Vec<char>>, b: &Vec<Vec<char>>) -> bool {
-    for i in 0..a.len() {
-        for j in 0..a[0].len() {
-            if a[i][j] != b[i][j] {
-                return false
-            }
-        }
-    }
-    true
-}
-
 // Custom very bad hashing function to not store the whole board in memory.
 // Also, gets the result of the board itself.
 // Was actually the pain, since hashing properly is hard and can have false positives which shittier hash
@@ -95,7 +84,6 @@ fn move_west(board: &Vec<Vec<char>>) -> Vec<Vec<char>> {
 
 // Part two
 fn get_loaded() -> usize {
-    let mut sum = 0;
     let mut data: Vec<Vec<char>> = include_str!("../../input/day14/input.txt").lines().map(|line| line.chars().collect()).collect();
     let mut visited_boards: Vec<(usize, usize)> = vec![board_hash(&data)];
 
@@ -126,7 +114,7 @@ fn get_loaded() -> usize {
         // Board is new, add it to the list
         visited_boards.push(board_data);
     }
-    sum
+    0
 }
 
 // Part one
